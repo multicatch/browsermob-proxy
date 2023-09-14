@@ -22,13 +22,13 @@ To use MITM with standalone LittleProxy, add a dependency on the `mitm` module i
     
     <!-- new dependency on the MITM module -->
     <dependency>
-        <groupId>net.lightbody.bmp</groupId>
+        <groupId>io.github.multicatch.bmp</groupId>
         <artifactId>mitm</artifactId>
         <version>2.1.4</version>
     </dependency>
 ```
 
-When creating your LittleProxy server, set the MitmManager to an instance of `net.lightbody.bmp.mitm.manager.ImpersonatingMitmManager`:
+When creating your LittleProxy server, set the MitmManager to an instance of `io.github.multicatch.bmp.mitm.manager.ImpersonatingMitmManager`:
 
 ```java
     HttpProxyServerBootstrap bootstrap = DefaultHttpProxyServer.bootstrap()
@@ -104,7 +104,7 @@ You can also load the root certificate and private key from separate PEM-encoded
 ## Trusted Root Certificates and Custom Trust Stores
 The MITM module trusts the Certificate Authorities in the JVM's default trust store, as well as a default list of trusted CAs derived from NSS/Firefox's list of trusted CAs (courtesy of the cURL team: https://curl.haxx.se/ca/cacert.pem).
 
-To add your own CA to the list of root CAs trusted by the MITM module, use the `add()` methods in the `net.lightbody.bmp.mitm.TrustSource` class. Alternatively, it is possible to disable upstream server validation, but this is only recommended when testing. Examples:
+To add your own CA to the list of root CAs trusted by the MITM module, use the `add()` methods in the `io.github.multicatch.bmp.mitm.TrustSource` class. Alternatively, it is possible to disable upstream server validation, but this is only recommended when testing. Examples:
 ```java
     // your root CA certificate(s) may be in a Java KeyStore, a PEM-encoded File or String, or an X509Certificate
     File pemEncodedCAFile = ...;

@@ -4,7 +4,7 @@
 
     <parent>
         <artifactId>browsermob-proxy</artifactId>
-        <groupId>net.lightbody.bmp</groupId>
+        <groupId>io.github.multicatch.bmp</groupId>
         <version>2.2.0-beta-1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -134,7 +134,7 @@
         </dependency>
 
         <dependency>
-            <groupId>net.lightbody.bmp</groupId>
+            <groupId>io.github.multicatch.bmp</groupId>
             <artifactId>mitm</artifactId>
             <version>${project.version}</version>
         </dependency>

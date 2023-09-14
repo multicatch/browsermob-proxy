@@ -12,7 +12,7 @@ command line as a standalone proxy, start with [Standalone](#getting-started-sta
 To use BrowserMob Proxy in your tests or application, add the `browsermob-core` dependency to your pom:
 ```xml
     <dependency>
-        <groupId>net.lightbody.bmp</groupId>
+        <groupId>io.github.multicatch.bmp</groupId>
         <artifactId>browsermob-core</artifactId>
         <version>2.1.5</version>
         <scope>test</scope>
@@ -66,7 +66,7 @@ We _highly_ recommend migrating existing code to the BrowserMobProxy interface u
 
 ### Using the LittleProxy implementation with 2.0.0 code
 
-The legacy interface, implicitly defined by the ProxyServer class, has been extracted into `net.lightbody.bmp.proxy.LegacyProxyServer` and is now officially deprecated. The new LittleProxy-based implementation will implement LegacyProxyServer for all 2.1.x releases. This means you can switch to the LittleProxy-powered implementation with minimal change to existing code ([with the exception of interceptors](#http-request-manipulation)):
+The legacy interface, implicitly defined by the ProxyServer class, has been extracted into `io.github.multicatch.bmp.proxy.LegacyProxyServer` and is now officially deprecated. The new LittleProxy-based implementation will implement LegacyProxyServer for all 2.1.x releases. This means you can switch to the LittleProxy-powered implementation with minimal change to existing code ([with the exception of interceptors](#http-request-manipulation)):
 
 ```java
     // With the Jetty-based 2.0.0 release, BMP was created like this:
@@ -203,14 +203,14 @@ BrowserMob Proxy 2.1 separates the Embedded Mode and REST API into two modules. 
 If you're using Java and Selenium, the easiest way to get started is to embed the project directly in your test. First, you'll need to make sure that all the dependencies are imported in to the project. You can find them in the *lib* directory. Or, if you're using Maven, you can add this to your pom:
 ```xml
     <dependency>
-        <groupId>net.lightbody.bmp</groupId>
+        <groupId>io.github.multicatch.bmp</groupId>
         <artifactId>browsermob-core</artifactId>
         <version>2.1.5</version>
         <scope>test</scope>
     </dependency>
 ```
 
-Once done, you can start a proxy using `net.lightbody.bmp.BrowserMobProxy`:
+Once done, you can start a proxy using `io.github.multicatch.bmp.BrowserMobProxy`:
 ```java
     BrowserMobProxy proxy = new BrowserMobProxyServer();
     proxy.start(0);
@@ -219,7 +219,7 @@ Once done, you can start a proxy using `net.lightbody.bmp.BrowserMobProxy`:
     //...
 ```
 
-Consult the Javadocs on the `net.lightbody.bmp.BrowserMobProxy` class for the full API.
+Consult the Javadocs on the `io.github.multicatch.bmp.BrowserMobProxy` class for the full API.
 
 ### Using With Selenium
 
@@ -323,7 +323,7 @@ When running the REST API with LittleProxy enabled, you cannot use the legacy `/
 
 ##### <a name="interceptorsRESTapiLPRequestFilter">Request filters</a>
 
-Javascript request filters have access to the variables `request` (type `io.netty.handler.codec.http.HttpRequest`), `contents` (type `net.lightbody.bmp.util.HttpMessageContents`), and `messageInfo` (type `net.lightbody.bmp.util.HttpMessageInfo`). `messageInfo` contains additional information about the message, including whether the message is sent over HTTP or HTTPS, as well as the original request received from the client before any changes made by previous filters. If the javascript returns an object of type `io.netty.handler.codec.http.HttpResponse`, the HTTP request will "short-circuit" and return the response immediately.
+Javascript request filters have access to the variables `request` (type `io.netty.handler.codec.http.HttpRequest`), `contents` (type `io.github.multicatch.bmp.util.HttpMessageContents`), and `messageInfo` (type `io.github.multicatch.bmp.util.HttpMessageInfo`). `messageInfo` contains additional information about the message, including whether the message is sent over HTTP or HTTPS, as well as the original request received from the client before any changes made by previous filters. If the javascript returns an object of type `io.netty.handler.codec.http.HttpResponse`, the HTTP request will "short-circuit" and return the response immediately.
 
 **Example: Modify User-Agent header**
 
@@ -333,7 +333,7 @@ curl -i -X POST -H 'Content-Type: text/plain' -d "request.headers().remove('User
 
 ##### <a name="interceptorsRESTapiLPResponseFilter">Response filters</a>
 
-Javascript response filters have access to the variables `response` (type `io.netty.handler.codec.http.HttpResponse`), `contents` (type `net.lightbody.bmp.util.HttpMessageContents`), and `messageInfo` (type `net.lightbody.bmp.util.HttpMessageInfo`). As in the request filter, `messageInfo` contains additional information about the message.
+Javascript response filters have access to the variables `response` (type `io.netty.handler.codec.http.HttpResponse`), `contents` (type `io.github.multicatch.bmp.util.HttpMessageContents`), and `messageInfo` (type `io.github.multicatch.bmp.util.HttpMessageInfo`). As in the request filter, `messageInfo` contains additional information about the message.
 
 **Example: Modify response body**
 
@@ -376,7 +376,7 @@ NodeJS bindings for browswermob-proxy are available [here](https://github.com/zz
 
 ### Logging
 
-When running in stand-alone mode, the proxy loads the default logging configuration from the conf/bmp-logging.yaml file. To increase/decrease the logging level, change the logging entry for net.lightbody.bmp.
+When running in stand-alone mode, the proxy loads the default logging configuration from the conf/bmp-logging.yaml file. To increase/decrease the logging level, change the logging entry for io.github.multicatch.bmp.
 
 ### DNS Resolution
 
@@ -393,7 +393,7 @@ You'll find the standalone BrowserMob Proxy distributable zip at `browsermob-dis
 When you build the latest code from source, you'll have access to the latest snapshot release. To use the SNAPSHOT version in your code, modify the version in your pom:
 ```xml
     <dependency>
-        <groupId>net.lightbody.bmp</groupId>
+        <groupId>io.github.multicatch.bmp</groupId>
         <artifactId>browsermob-core</artifactId>
         <version>2.1.6-SNAPSHOT</version>
         <scope>test</scope>

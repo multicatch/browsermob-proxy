@@ -19,11 +19,11 @@ configuration:
   loggers:
     logger:
       -
-        name: net.lightbody.bmp.proxy.jetty.util.ThreadedServer
+        name: io.github.multicatch.bmp.proxy.jetty.util.ThreadedServer
         level: warn
         additivity: false
       -
-        name: net.lightbody.bmp
+        name: io.github.multicatch.bmp
         # to suppress unwanted BMP logging statements, set the level below for the source logger to WARN or ERROR.
         # to enable more verbose logging, set the level to DEBUG or TRACE.
         level: info
