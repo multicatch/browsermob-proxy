@@ -59,7 +59,7 @@ public class ProxyResource {
     }
 
     @Post
-    public Reply<?> newProxy(Request<String> request) {
+    public Reply<?> newProxy(Request request) {
         String systemProxyHost = System.getProperty("http.proxyHost");
         String systemProxyPort = System.getProperty("http.proxyPort");
         String httpProxy = request.param("httpProxy");
@@ -123,7 +123,7 @@ public class ProxyResource {
 
     @Put
     @At("/:port/har")
-    public Reply<?> newHar(@Named("port") int port, Request<String> request) {
+    public Reply<?> newHar(@Named("port") int port, Request request) {
         BrowserMobProxyServerLegacyAdapter proxy = proxyManager.get(port);
         if (proxy == null) {
             return Reply.saying().notFound();
@@ -155,7 +155,7 @@ public class ProxyResource {
 
     @Put
     @At("/:port/har/pageRef")
-    public Reply<?> setPage(@Named("port") int port, Request<String> request) {
+    public Reply<?> setPage(@Named("port") int port, Request request) {
         BrowserMobProxyServerLegacyAdapter proxy = proxyManager.get(port);
         if (proxy == null) {
             return Reply.saying().notFound();
@@ -170,7 +170,7 @@ public class ProxyResource {
 
     @Get
     @At("/:port/blacklist")
-    public Reply<?> getBlacklist(@Named("port") int port, Request<String> request) {
+    public Reply<?> getBlacklist(@Named("port") int port, Request request) {
         BrowserMobProxyServerLegacyAdapter proxy = proxyManager.get(port);
         if (proxy == null) {
             return Reply.saying().notFound();
@@ -181,7 +181,7 @@ public class ProxyResource {
 
     @Put
     @At("/:port/blacklist")
-    public Reply<?> blacklist(@Named("port") int port, Request<String> request) {
+    public Reply<?> blacklist(@Named("port") int port, Request request) {
         BrowserMobProxyServerLegacyAdapter proxy = proxyManager.get(port);
         if (proxy == null) {
             return Reply.saying().notFound();
@@ -197,7 +197,7 @@ public class ProxyResource {
 
     @Delete
     @At("/:port/blacklist")
-    public Reply<?> clearBlacklist(@Named("port") int port, Request<String> request) {
+    public Reply<?> clearBlacklist(@Named("port") int port, Request request) {
         BrowserMobProxyServerLegacyAdapter proxy = proxyManager.get(port);
         if (proxy == null) {
             return Reply.saying().notFound();
@@ -209,7 +209,7 @@ public class ProxyResource {
 
     @Get
     @At("/:port/whitelist")
-    public Reply<?> getWhitelist(@Named("port") int port, Request<String> request) {
+    public Reply<?> getWhitelist(@Named("port") int port, Request request) {
         BrowserMobProxyServerLegacyAdapter proxy = proxyManager.get(port);
         if (proxy == null) {
             return Reply.saying().notFound();
@@ -220,7 +220,7 @@ public class ProxyResource {
 
     @Put
     @At("/:port/whitelist")
-    public Reply<?> whitelist(@Named("port") int port, Request<String> request) {
+    public Reply<?> whitelist(@Named("port") int port, Request request) {
         BrowserMobProxyServerLegacyAdapter proxy = proxyManager.get(port);
         if (proxy == null) {
             return Reply.saying().notFound();
@@ -235,7 +235,7 @@ public class ProxyResource {
 
     @Delete
     @At("/:port/whitelist")
-    public Reply<?> clearWhitelist(@Named("port") int port, Request<String> request) {
+    public Reply<?> clearWhitelist(@Named("port") int port, Request request) {
         BrowserMobProxyServerLegacyAdapter proxy = proxyManager.get(port);
         if (proxy == null) {
             return Reply.saying().notFound();
@@ -247,7 +247,7 @@ public class ProxyResource {
 
     @Post
     @At("/:port/auth/basic/:domain")
-    public Reply<?> autoBasicAuth(@Named("port") int port, @Named("domain") String domain, Request<String> request) {
+    public Reply<?> autoBasicAuth(@Named("port") int port, @Named("domain") String domain, Request request) {
         BrowserMobProxyServerLegacyAdapter proxy = proxyManager.get(port);
         if (proxy == null) {
             return Reply.saying().notFound();
@@ -261,7 +261,7 @@ public class ProxyResource {
 
     @Post
     @At("/:port/headers")
-    public Reply<?> updateHeaders(@Named("port") int port, Request<String> request) {
+    public Reply<?> updateHeaders(@Named("port") int port, Request request) {
         BrowserMobProxyServerLegacyAdapter proxy = proxyManager.get(port);
         if (proxy == null) {
             return Reply.saying().notFound();
@@ -278,7 +278,7 @@ public class ProxyResource {
 
     @Post
     @At("/:port/filter/request")
-    public Reply<?> addRequestFilter(@Named("port") int port, Request<String> request) throws IOException, ScriptException {
+    public Reply<?> addRequestFilter(@Named("port") int port, Request request) throws IOException, ScriptException {
         BrowserMobProxyServerLegacyAdapter proxy = proxyManager.get(port);
         if (proxy == null) {
             return Reply.saying().notFound();
@@ -296,7 +296,7 @@ public class ProxyResource {
 
     @Post
     @At("/:port/filter/response")
-    public Reply<?> addResponseFilter(@Named("port") int port, Request<String> request) throws IOException, ScriptException {
+    public Reply<?> addResponseFilter(@Named("port") int port, Request request) throws IOException, ScriptException {
         BrowserMobProxyServerLegacyAdapter proxy = proxyManager.get(port);
         if (proxy == null) {
             return Reply.saying().notFound();
@@ -314,7 +314,7 @@ public class ProxyResource {
 
     @Put
     @At("/:port/timeout")
-    public Reply<?> timeout(@Named("port") int port, Request<String> request) {
+    public Reply<?> timeout(@Named("port") int port, Request request) {
         BrowserMobProxyServerLegacyAdapter proxy = proxyManager.get(port);
         if (proxy == null) {
             return Reply.saying().notFound();
@@ -365,7 +365,7 @@ public class ProxyResource {
 
     @Post
     @At("/:port/hosts")
-    public Reply<?> remapHosts(@Named("port") int port, Request<String> request) {
+    public Reply<?> remapHosts(@Named("port") int port, Request request) {
         BrowserMobProxyServerLegacyAdapter proxy = proxyManager.get(port);
         if (proxy == null) {
             return Reply.saying().notFound();
@@ -387,7 +387,7 @@ public class ProxyResource {
 
     @Put
     @At("/:port/wait")
-    public Reply<?> wait(@Named("port") int port, Request<String> request) {
+    public Reply<?> wait(@Named("port") int port, Request request) {
         BrowserMobProxyServerLegacyAdapter proxy = proxyManager.get(port);
         if (proxy == null) {
             return Reply.saying().notFound();
@@ -413,7 +413,7 @@ public class ProxyResource {
 
     @Put
     @At("/:port/rewrite")
-    public Reply<?> rewriteUrl(@Named("port") int port, Request<String> request) {
+    public Reply<?> rewriteUrl(@Named("port") int port, Request request) {
         BrowserMobProxyServerLegacyAdapter proxy = proxyManager.get(port);
         if (proxy == null) {
             return Reply.saying().notFound();
@@ -427,7 +427,7 @@ public class ProxyResource {
 
     @Delete
     @At("/:port/rewrite")
-    public Reply<?> clearRewriteRules(@Named("port") int port, Request<String> request) {
+    public Reply<?> clearRewriteRules(@Named("port") int port, Request request) {
         BrowserMobProxyServerLegacyAdapter proxy = proxyManager.get(port);
         if (proxy == null) {
             return Reply.saying().notFound();
@@ -439,7 +439,7 @@ public class ProxyResource {
 
     @Put
     @At("/:port/retry")
-    public Reply<?> retryCount(@Named("port") int port, Request<String> request) {
+    public Reply<?> retryCount(@Named("port") int port, Request request) {
         BrowserMobProxyServerLegacyAdapter proxy = proxyManager.get(port);
         if (proxy == null) {
             return Reply.saying().notFound();
@@ -499,7 +499,7 @@ public class ProxyResource {
         }
     }
 
-    private String getEntityBodyFromRequest(Request<String> request) throws IOException {
+    private String getEntityBodyFromRequest(Request request) throws IOException {
         String contentTypeHeader = request.header("Content-Type");
         Charset charset = null;
         try {

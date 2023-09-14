@@ -56,6 +56,7 @@ import org.littleshoot.proxy.HttpFiltersSourceAdapter;
 import org.littleshoot.proxy.HttpProxyServer;
 import org.littleshoot.proxy.HttpProxyServerBootstrap;
 import org.littleshoot.proxy.MitmManager;
+import org.littleshoot.proxy.impl.ClientDetails;
 import org.littleshoot.proxy.impl.DefaultHttpProxyServer;
 import org.littleshoot.proxy.impl.ProxyUtils;
 import org.littleshoot.proxy.impl.ThreadPoolConfiguration;
@@ -339,28 +340,25 @@ public class BrowserMobProxyServer implements BrowserMobProxy {
             // chained proxy after the proxy is started.
             bootstrappedWithDefaultChainedProxy.set(true);
 
-            bootstrap.withChainProxyManager(new ChainedProxyManager() {
-                @Override
-                public void lookupChainedProxies(HttpRequest httpRequest, Queue<ChainedProxy> chainedProxies) {
-                    final InetSocketAddress upstreamProxy = upstreamProxyAddress;
-                    if (upstreamProxy != null) {
-                        chainedProxies.add(new ChainedProxyAdapter() {
-                            @Override
-                            public InetSocketAddress getChainedProxyAddress() {
-                                return upstreamProxy;
-                            }
+            bootstrap.withChainProxyManager((httpRequest, chainedProxies, clientDetails) -> {
+                final InetSocketAddress upstreamProxy = upstreamProxyAddress;
+                if (upstreamProxy != null) {
+                    chainedProxies.add(new ChainedProxyAdapter() {
+                        @Override
+                        public InetSocketAddress getChainedProxyAddress() {
+                            return upstreamProxy;
+                        }
 
-                            @Override
-                            public void filterRequest(HttpObject httpObject) {
-                                String chainedProxyAuth = chainedProxyCredentials;
-                                if (chainedProxyAuth != null) {
-                                    if (httpObject instanceof HttpRequest) {
-                                        HttpHeaders.addHeader((HttpRequest)httpObject, HttpHeaders.Names.PROXY_AUTHORIZATION, "Basic " + chainedProxyAuth);
-                                    }
+                        @Override
+                        public void filterRequest(HttpObject httpObject) {
+                            String chainedProxyAuth = chainedProxyCredentials;
+                            if (chainedProxyAuth != null) {
+                                if (httpObject instanceof HttpRequest) {
+                                    HttpHeaders.addHeader((HttpRequest)httpObject, HttpHeaders.Names.PROXY_AUTHORIZATION, "Basic " + chainedProxyAuth);
                                 }
                             }
-                        });
-                    }
+                        }
+                    });
                 }
             });
         }
