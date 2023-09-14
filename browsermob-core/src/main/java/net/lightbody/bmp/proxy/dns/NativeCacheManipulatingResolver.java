@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * An {@link net.lightbody.bmp.proxy.dns.AdvancedHostResolver} that provides native JVM lookup using {@link net.lightbody.bmp.proxy.dns.NativeResolver}
  * but also implements DNS cache manipulation functionality.
- * <p/>
+ * <br>
  * <b>Important note:</b> The Oracle JVM does not provide any public facility to manipulate the JVM's DNS cache. This class uses reflection to forcibly
  * manipulate the cache, which includes access to private class members that are not part of the published Java specification. As such, this
  * implementation is brittle and may break in a future Java release, or may not work on non-Oracle JVMs. If this implementation cannot
@@ -63,6 +63,11 @@ public class NativeCacheManipulatingResolver extends NativeResolver {
             }
         } catch (ClassNotFoundException | NoSuchFieldException | IllegalAccessException e) {
             log.warn("Unable to modify native JVM DNS cache timeouts", e);
+        } catch (Exception e) {
+            if ("java.lang.reflect.InaccessibleObjectException".equals(e.getClass().getName())) {
+                log.error("Cannot change DNS cache policy. You are using Java 9+, thus we cannot modify private static field cachePolicy. Please add JVM option \"--add-exports java.base/sun.net=ALL-UNNAMED\" to fix this.");
+            }
+            throw e;
         }
     }
 

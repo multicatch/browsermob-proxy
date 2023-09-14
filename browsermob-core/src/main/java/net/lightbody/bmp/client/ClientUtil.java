@@ -42,7 +42,7 @@ public class ClientUtil {
      * calling {@link net.lightbody.bmp.BrowserMobProxy#setHostNameResolver(net.lightbody.bmp.proxy.dns.AdvancedHostResolver)}.
      *
      * @return a new DnsJavaResolver
-     * @deprecated The dnsjava resolver has been deprecated in favor of the standard JVM resolver and will be removed in BMP >2.1.
+     * @deprecated The dnsjava resolver has been deprecated in favor of the standard JVM resolver and will be removed in BMP &gt;2.1.
      */
     public static AdvancedHostResolver createDnsJavaResolver() {
         return new DnsJavaResolver();
@@ -54,7 +54,7 @@ public class ClientUtil {
      * Can be used when calling {@link net.lightbody.bmp.BrowserMobProxy#setHostNameResolver(net.lightbody.bmp.proxy.dns.AdvancedHostResolver)}.
      *
      * @return a new ChainedHostResolver that resolves addresses first using a DnsJavaResolver, then using a NativeCacheManipulatingResolver
-     * @deprecated The dnsjava resolver has been deprecated in favor of the standard JVM resolver and will be removed in BMP >2.1.
+     * @deprecated The dnsjava resolver has been deprecated in favor of the standard JVM resolver and will be removed in BMP &gt;2.1.
      */
     public static AdvancedHostResolver createDnsJavaWithNativeFallbackResolver() {
         return new ChainedHostResolver(ImmutableList.of(new DnsJavaResolver(), new NativeCacheManipulatingResolver()));
