@@ -22,7 +22,7 @@ To use MITM with standalone LittleProxy, add a dependency on the `mitm` module i
     
     <!-- new dependency on the MITM module -->
     <dependency>
-        <groupId>io.github.multicatch.bmp</groupId>
+        <groupId>io.github.multicatch</groupId>
         <artifactId>mitm</artifactId>
         <version>2.1.4</version>
     </dependency>
